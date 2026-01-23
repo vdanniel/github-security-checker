@@ -2,6 +2,7 @@
 export * from './types';
 export * from './scanner';
 export * from './reports/soc2';
+export * from './fixer';
 
 // Check modules
 export { checkBranchProtection } from './checks/branch-protection';
