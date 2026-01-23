@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "github-security": {
+      "command": "node",
+      "args": ["./packages/mcp/dist/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "your-github-token-here"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "list_repos",
+        "scan_repo",
+        "scan_multiple_repos",
+        "generate_soc2_report",
+        "get_recommendations"
+      ]
+    }
+  }
+}
