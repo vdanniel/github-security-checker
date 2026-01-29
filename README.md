@@ -1,5 +1,7 @@
 # GitHub Security Checker
 
+> ⚠️ **Disclaimer**: This is an unofficial, community-built tool and is not affiliated with, endorsed by, or supported by GitHub, Inc.
+
 A comprehensive tool for scanning GitHub repositories for security configuration issues and best practices. Provides actionable recommendations and SOC 2 compliance reports.
 
 ## Features
