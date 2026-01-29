@@ -165,7 +165,7 @@ Features:
 Each repository receives a score from 0-100 based on findings:
 
 | Severity | Point Deduction |
-|----------|------------------|
+|----------|-----------------|
 | Critical | -25 points |
 | High | -15 points |
 | Medium | -8 points |
@@ -204,14 +204,44 @@ Required scopes for your Personal Access Token:
 
 ```
 github-security-checker/
+├── .github/
+│   └── workflows/
+│       ├── vscode-extension.yml  # Build & publish VS Code extension
+│       └── packages.yml          # Build & test core packages
 ├── packages/
 │   ├── core/          # Core scanning logic and types
 │   ├── cli/           # Command-line interface
 │   ├── mcp/           # MCP server for AI assistants
+│   ├── vscode/        # VS Code extension
 │   └── web/           # Next.js web dashboard
 ├── package.json       # Workspace configuration
 └── README.md
 ```
+
+## VS Code Extension
+
+Install from [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=DanielSurendran.github-security-checker) or [Open VSX](https://open-vsx.org/).
+
+Commands:
+- `GitHub Security: Connect to GitHub` - Authenticate with GitHub
+- `GitHub Security: Scan Repositories` - Run security scan
+- `GitHub Security: Show Results` - View scan results
+- `GitHub Security: Generate SOC 2 Report` - Generate compliance report
+- `GitHub Security: Fix Finding` - Apply recommended fix
+
+## CI/CD
+
+The project uses GitHub Actions for continuous integration:
+
+- **vscode-extension.yml** - Builds and publishes the VS Code extension to VS Code Marketplace and Open VSX on pushes to main
+- **packages.yml** - Builds, lints, and tests core packages on every push/PR
+
+### Required Secrets
+
+| Secret | Description |
+|--------|-------------|
+| `VSCE_PAT` | Personal Access Token for VS Code Marketplace |
+| `OVSX_PAT` | Personal Access Token for Open VSX Registry |
 
 ## Development
 
