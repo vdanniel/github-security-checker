@@ -5,6 +5,10 @@
   "version": "0.3.0",
   "publisher": "DanielSurendran",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vdanniel/github-security-checker"
+  },
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
@@ -57,9 +61,10 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run package",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
+    "package": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
     "lint": "eslint src --ext ts"
   },
   "dependencies": {
@@ -68,6 +73,7 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.85.0",
+    "esbuild": "^0.20.2",
     "typescript": "^5.0.0"
   }
 }
