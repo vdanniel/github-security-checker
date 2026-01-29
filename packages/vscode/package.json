@@ -2,15 +2,19 @@
   "name": "github-security-checker",
   "displayName": "GitHub Security Checker",
   "description": "Scan GitHub repositories for security misconfigurations with SOC 2 compliance mapping",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "DanielSurendran",
   "license": "MIT",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
