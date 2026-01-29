@@ -77,4 +77,4 @@ jobs:
           cd packages/vscode
           npx ovsx publish --no-dependencies
         env:
-          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+          OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
