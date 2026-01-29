@@ -4,6 +4,7 @@
   "description": "Scan GitHub repositories for security misconfigurations with SOC 2 compliance mapping",
   "version": "0.1.0",
   "publisher": "DanielSurendran",
+  "license": "MIT",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.85.0"
