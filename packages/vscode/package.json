@@ -1,0 +1,69 @@
+{
+  "name": "github-security-checker",
+  "displayName": "GitHub Security Checker",
+  "description": "Scan GitHub repositories for security misconfigurations with SOC 2 compliance mapping",
+  "version": "0.1.0",
+  "publisher": "DanielSurendran",
+  "icon": "images/icon.svg",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ghsec.connect",
+        "title": "GitHub Security: Connect to GitHub"
+      },
+      {
+        "command": "ghsec.scan",
+        "title": "GitHub Security: Scan Repositories"
+      },
+      {
+        "command": "ghsec.showResults",
+        "title": "GitHub Security: Show Results"
+      },
+      {
+        "command": "ghsec.generateReport",
+        "title": "GitHub Security: Generate SOC 2 Report"
+      },
+      {
+        "command": "ghsec.fixFinding",
+        "title": "GitHub Security: Fix Finding"
+      },
+      {
+        "command": "ghsec.disconnect",
+        "title": "GitHub Security: Disconnect"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "ghsecView",
+          "name": "GitHub Security",
+          "icon": "images/icon.svg"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "GitHub Security Checker",
+      "properties": {}
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "@ghsec/core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.0.0"
+  }
+}

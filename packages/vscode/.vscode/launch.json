@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": ["${workspaceFolder}/out/**/*.js"],
+      "preLaunchTask": "npm: watch"
+    },
+    {
+      "name": "Run Extension (Pick Folder)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${input:folderPath}"
+      ],
+      "outFiles": ["${workspaceFolder}/out/**/*.js"],
+      "preLaunchTask": "npm: watch"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "folderPath",
+      "type": "promptString",
+      "description": "Full path to folder (e.g., /Users/you/myrepo)",
+      "default": ""
+    }
+  ]
+}
