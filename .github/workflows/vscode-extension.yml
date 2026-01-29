@@ -2,17 +2,52 @@ name: VS Code Extension
 
 on:
   workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        id: version
+        run: |
+          cd packages/vscode
+          OLD_VERSION=$(node -p "require('./package.json').version")
+          npm version ${{ inputs.version_bump }} --no-git-tag-version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "old_version=$OLD_VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Commit version bump
+        run: |
+          git add packages/vscode/package.json
+          git commit -m "chore: bump vscode extension to v${{ steps.version.outputs.new_version }}"
+          git push
 
       - name: Install dependencies
         run: npm install
@@ -27,33 +62,12 @@ jobs:
         run: |
           cd packages/vscode
           npx vsce package --no-dependencies
-        
+
       - name: Upload VSIX
         uses: actions/upload-artifact@v4
         with:
           name: vscode-extension
           path: packages/vscode/*.vsix
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build core
-        run: npm run build --workspace=@ghsec/core
-
-      - name: Build extension
-        run: npm run compile --workspace=packages/vscode
 
       - name: Publish to VS Code Marketplace
         run: |
@@ -68,3 +82,18 @@ jobs:
           npx ovsx publish --no-dependencies
         env:
           OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: vscode-v${{ steps.version.outputs.new_version }}
+          name: VS Code Extension v${{ steps.version.outputs.new_version }}
+          body: |
+            ## VS Code Extension v${{ steps.version.outputs.new_version }}
+            
+            Install from:
+            - [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=DanielSurendran.github-security-checker)
+            - [Open VSX](https://open-vsx.org/extension/DanielSurendran/github-security-checker)
+          files: packages/vscode/*.vsix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
