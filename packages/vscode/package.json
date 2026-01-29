@@ -4,7 +4,6 @@
   "description": "Scan GitHub repositories for security misconfigurations with SOC 2 compliance mapping",
   "version": "0.1.0",
   "publisher": "DanielSurendran",
-  "icon": "images/icon.svg",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -42,8 +41,7 @@
       "explorer": [
         {
           "id": "ghsecView",
-          "name": "GitHub Security",
-          "icon": "images/icon.svg"
+          "name": "GitHub Security"
         }
       ]
     },
