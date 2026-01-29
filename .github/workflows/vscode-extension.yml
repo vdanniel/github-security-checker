@@ -61,7 +61,7 @@ jobs:
       - name: Package extension
         run: |
           cd packages/vscode
-          npx vsce package --no-dependencies
+          npx @vscode/vsce package --no-dependencies
 
       - name: Upload VSIX
         uses: actions/upload-artifact@v4
@@ -72,7 +72,7 @@ jobs:
       - name: Publish to VS Code Marketplace
         run: |
           cd packages/vscode
-          npx vsce publish --no-dependencies
+          npx @vscode/vsce publish --no-dependencies
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
