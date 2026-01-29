@@ -2,7 +2,7 @@
   "name": "github-security-checker",
   "displayName": "GitHub Security Checker",
   "description": "Scan GitHub repositories for security misconfigurations with SOC 2 compliance mapping",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publisher": "DanielSurendran",
   "license": "MIT",
   "repository": {
