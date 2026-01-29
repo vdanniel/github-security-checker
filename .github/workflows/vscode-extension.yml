@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Build core
-        run: npm run compile --workspace=@ghsec/core
+        run: npm run build --workspace=@ghsec/core
 
       - name: Build extension
         run: npm run compile --workspace=packages/vscode
@@ -60,7 +60,7 @@ jobs:
         run: npm install
 
       - name: Build core
-        run: npm run compile --workspace=@ghsec/core
+        run: npm run build --workspace=@ghsec/core
 
       - name: Build extension
         run: npm run compile --workspace=packages/vscode
